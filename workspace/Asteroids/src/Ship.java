@@ -8,7 +8,7 @@ public class Ship extends GameObject
     
     public enum WeaponType
     {
-        NORMAL, SPREAD, FLAME, LASER
+        NORMAL, SPREAD, OCTOPUS, LASER
     };
     private WeaponType weaponType_;
     
@@ -61,6 +61,8 @@ public class Ship extends GameObject
         {        
         case SPREAD:
             return Bullet.spreadGenerator( this );
+        case OCTOPUS:
+            return Bullet.octoGenerator( this );
         case NORMAL:            
         default:
             LinkedList<Bullet> l = new LinkedList<Bullet>();

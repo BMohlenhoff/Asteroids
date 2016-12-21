@@ -33,8 +33,7 @@ public class Asteroid extends GameObject
             0.0,
             bearingDot,
             0.0,
-            asteroidShapeGenerator( size ));
-        System.out.println(" bearingDot=" + bearingDot );
+            asteroidShapeGenerator( size ));        
         size_ = size;
     }
     public Asteroid( double x, double y )

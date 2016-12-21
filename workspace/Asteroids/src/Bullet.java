@@ -5,7 +5,11 @@ import java.util.List;
 public class Bullet extends GameObject
 {
     private final static double BULLET_VELOCITY_ = 10.0;
+    
     private long BULLET_LIFETIME_ = 1000;
+    
+    private long BULLET_COOLDOWN_ = 250;    
+    private long lastBulletTime_ = 0;
     
     public static List<Bullet> spreadGenerator( Ship ship )
     {
@@ -17,6 +21,18 @@ public class Bullet extends GameObject
         l.add( new Bullet( ship.x(), ship.y(), ship.bearing(), SPREAD_LIFETIME_ ));
         l.add( new Bullet( ship.x(), ship.y(), ship.bearing() + ( 5.0 * Math.PI / 180.0 ), SPREAD_LIFETIME_ ));
         l.add( new Bullet( ship.x(), ship.y(), ship.bearing() + ( 10.0 * Math.PI / 180.0 ), SPREAD_LIFETIME_ ));
+        return l;
+    }
+    
+    public static List<Bullet> octoGenerator( Ship ship )
+    {
+        long OCTO_LIFETIME_ = 500;                
+        LinkedList<Bullet> l = new LinkedList<Bullet>();
+        for ( int ii = 0; ii < 8; ++ii )
+        {
+            double offset = (((double)ii / 8.0 ) * 2.0 * Math.PI );            
+            l.add( new Bullet( ship.x(), ship.y(), ship.bearing() + offset, OCTO_LIFETIME_ ));
+        }                
         return l;
     }
             

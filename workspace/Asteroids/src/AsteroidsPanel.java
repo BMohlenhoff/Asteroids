@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,10 +37,7 @@ public class AsteroidsPanel extends JPanel
         new Asteroid( 0.0, 0.0, 2, 0.0 ),
         new Asteroid( 0.0, 0.0, 1, 0.0 ),
         new Asteroid( 0.0, 0.0, 0, 0.0 )   
-    };
-    
-    private long lastBulletTime_;
-    private final long BULLET_COOLDOWN_ = 200;
+    };   
     
     private long gameStartTime_ = 0;
     private long gameOverTime_ = 0;
@@ -88,7 +86,6 @@ public class AsteroidsPanel extends JPanel
         gameMode_ = GameMode.IN_PROGRESS;
         bullets_ = new LinkedList<Bullet>();
         asteroids_ = new LinkedList<Asteroid>();
-        lastBulletTime_ = System.currentTimeMillis();
         score_= 0;
         gameOverTime_ = System.currentTimeMillis();
         gameStartTime_= System.currentTimeMillis();
@@ -175,14 +172,11 @@ public class AsteroidsPanel extends JPanel
             {
                 ship_.rotate( 1.0 );           
             }
-            
-            if ( lastBulletTime_ + BULLET_COOLDOWN_ < System.currentTimeMillis())
+                        
+            if ( listener_.isKeyPressed( KeyEvent.VK_SPACE ))
             {
-                if ( listener_.isKeyPressed( KeyEvent.VK_SPACE ))
-                {
-                    bullets_.addAll( ship_.fire());
-                    lastBulletTime_ = System.currentTimeMillis();
-                }
+                List<Bullet> newBullets = ship_.fire();                 
+                bullets_.addAll( ship_.fire());                
             }
             
             if ( lastSwapTime_ + SWAP_COOLDOWN_ < System.currentTimeMillis())
@@ -195,6 +189,11 @@ public class AsteroidsPanel extends JPanel
                 if ( listener_.isKeyPressed( KeyEvent.VK_2 ) && ship_.weaponType() != Ship.WeaponType.SPREAD )
                 {
                     ship_.weaponType( Ship.WeaponType.SPREAD );
+                    lastSwapTime_ = System.currentTimeMillis();
+                }
+                if ( listener_.isKeyPressed( KeyEvent.VK_3 ) && ship_.weaponType() != Ship.WeaponType.OCTOPUS )
+                {
+                    ship_.weaponType( Ship.WeaponType.OCTOPUS );
                     lastSwapTime_ = System.currentTimeMillis();
                 }
             }

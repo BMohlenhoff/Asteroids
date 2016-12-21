@@ -58,6 +58,11 @@ public class KeyboardListener
         panel.getInputMap().put( KeyStroke.getKeyStroke(KeyEvent.VK_2, 0, true ), "2 released" );
         panel.getActionMap().put( "2 released", new KeyboardAction( false ));        
         
+        panel.getInputMap().put( KeyStroke.getKeyStroke(KeyEvent.VK_3, 0, false ), "3 pressed" );
+        panel.getActionMap().put( "3 pressed", new KeyboardAction( true ));
+        panel.getInputMap().put( KeyStroke.getKeyStroke(KeyEvent.VK_3, 0, true ), "3 released" );
+        panel.getActionMap().put( "3 released", new KeyboardAction( false ));  
+        
         panel.getInputMap().put( KeyStroke.getKeyStroke(KeyEvent.VK_7, 0, false ), "7 pressed" );
         panel.getActionMap().put( "7 pressed", new KeyboardAction( true ));
         panel.getInputMap().put( KeyStroke.getKeyStroke(KeyEvent.VK_7, 0, true ), "7 released" );
@@ -129,6 +134,9 @@ public class KeyboardListener
                 break;
             case "2":
                 keyMap_[KeyEvent.VK_2] = action_;
+                break;
+            case "3":
+                keyMap_[KeyEvent.VK_3] = action_;
                 break;
             case "7":
                 keyMap_[KeyEvent.VK_7] = action_;
